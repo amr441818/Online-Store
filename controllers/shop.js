@@ -5,7 +5,7 @@ const stripe = require("stripe")(process.env.STRIPE_URI);
 //will get us a documendt constractor
 const PDFdocument = require("pdfkit");
 const path = require("path");
-const ITEMS_PER_PAGE = 1;
+const ITEMS_PER_PAGE = 8;
 exports.getProducts = (req, res, next) => {
   const page = +req.query.page || 1;
   let totalProducts;
