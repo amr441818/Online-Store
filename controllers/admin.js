@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Product = require("../models/product");
 const { validationResult } = require("express-validator");
 const utilFunctions = require("../util/file");
-const ITEMS_PER_PAGE = 1;
+const ITEMS_PER_PAGE = 6;
 exports.getAddProduct = (req, res, next) => {
   res.render("admin/edit-product", {
     pageTitle: "Add Product",
@@ -72,7 +72,6 @@ exports.postAddProduct = (req, res, next) => {
       res.redirect("/admin/products");
     })
     .catch((err) => {
-      
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -159,7 +158,6 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-
   const page = +req.query.page || 1;
   let totalProducts;
   Product.find({ userId: req.user._id })
@@ -210,6 +208,5 @@ exports.deleteProduct = (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({ message: "deleted failed!" });
-    
     });
 };
